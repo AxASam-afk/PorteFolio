@@ -18,7 +18,6 @@ type Project = {
   caseMini: string;
   image: string;
   badges: string[];
-  href: string;
   imageUrl: string;
 };
 
@@ -42,7 +41,6 @@ const projects: Project[] = [
     image: "/images/projects/secure-products.svg",
     imageUrl:
       "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&w=1400&q=80",
-    href: "#contact",
     badges: ["Auth", "Intégrité", "Secure coding"],
   },
   {
@@ -56,7 +54,6 @@ const projects: Project[] = [
     image: "/images/projects/unity-platformer.svg",
     imageUrl:
       "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1400&q=80",
-    href: "#contact",
     badges: ["Unity", "Gameplay", "Autonomie"],
   },
   {
@@ -70,7 +67,6 @@ const projects: Project[] = [
     image: "/images/projects/ctf-dashboard.svg",
     imageUrl:
       "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1400&q=80",
-    href: "#contact",
     badges: ["CTF", "Organisation", "Recherche"],
   },
   {
@@ -84,7 +80,6 @@ const projects: Project[] = [
     image: "/images/projects/network-scanner.svg",
     imageUrl:
       "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1400&q=80",
-    href: "#contact",
     badges: ["Recon", "Synthèse", "Lab"],
   },
   {
@@ -98,7 +93,6 @@ const projects: Project[] = [
     image: "/images/projects/hardening.svg",
     imageUrl:
       "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=1400&q=80",
-    href: "#contact",
     badges: ["Procédures", "Rigueur", "Sécurisation"],
   },
   {
@@ -112,7 +106,6 @@ const projects: Project[] = [
     image: "/images/projects/password-vault.svg",
     imageUrl:
       "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?auto=format&fit=crop&w=1400&q=80",
-    href: "#contact",
     badges: ["Crypto", "Threat model", "Prototype"],
   },
 ];
@@ -139,23 +132,24 @@ function ProjectCard({ p, delayMs }: { p: Project; delayMs: number }) {
             title={p.title}
             subtitle={p.description}
             imageUrl={p.imageUrl}
-            href={p.href}
-            className={cn("w-full max-w-[22rem]", "mx-auto")}
+            details={
+              <>
+                <p className="text-muted">{p.description}</p>
+                <p className="mt-4 text-ink/85">{p.caseMini}</p>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {p.badges.map((b) => (
+                    <span
+                      key={b}
+                      className="rounded-3xl border border-stroke bg-bg/40 px-3 py-1 text-xs font-semibold text-ink/80"
+                    >
+                      {b}
+                    </span>
+                  ))}
+                </div>
+              </>
+            }
+            className={cn("mx-auto w-full max-w-[22rem]")}
           />
-        </div>
-
-        <div className="rounded-3xl border border-stroke bg-surface px-5 py-4 shadow-premium backdrop-blur-md">
-          <p className="text-sm leading-6 text-ink/80">{p.caseMini}</p>
-          <div className="mt-4 flex flex-wrap gap-2">
-            {p.badges.map((b) => (
-              <span
-                key={b}
-                className="rounded-3xl border border-stroke bg-bg/40 px-3 py-1 text-xs font-semibold text-ink/80"
-              >
-                {b}
-              </span>
-            ))}
-          </div>
         </div>
       </div>
     </Reveal>
@@ -204,7 +198,7 @@ export function Projects() {
         </div>
       </Reveal>
 
-      <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+      <div className="mt-10 grid gap-4 overflow-visible md:grid-cols-2 xl:grid-cols-3">
         {projects.map((p, i) => (
           <ProjectCard key={p.slug} p={p} delayMs={80 + i * 70} />
         ))}
