@@ -10,9 +10,7 @@ export interface InteractiveTravelCardProps {
   title: string;
   subtitle: string;
   imageUrl: string;
-  actionText: string;
   href: string;
-  onActionClick: () => void;
   className?: string;
 }
 
@@ -25,7 +23,7 @@ export const InteractiveTravelCard = React.forwardRef<
   InteractiveTravelCardProps
 >(
   (
-    { title, subtitle, imageUrl, actionText, href, onActionClick, className },
+    { title, subtitle, imageUrl, href, className },
     ref,
   ) => {
     const mouseX = useMotionValue(0);
@@ -85,7 +83,7 @@ export const InteractiveTravelCard = React.forwardRef<
             transform: "translateZ(50px)",
             transformStyle: "preserve-3d",
           }}
-          className="absolute inset-4 grid h-[calc(100%-2rem)] w-[calc(100%-2rem)] grid-rows-[1fr_auto] overflow-hidden rounded-3xl shadow-premium"
+          className="absolute inset-4 flex h-[calc(100%-2rem)] w-[calc(100%-2rem)] flex-col overflow-hidden rounded-3xl shadow-premium"
         >
           <Image
             src={imageUrl}
@@ -99,7 +97,7 @@ export const InteractiveTravelCard = React.forwardRef<
           <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/65" />
           <div className="absolute inset-0 ring-1 ring-inset ring-white/10" />
 
-          <div className="relative flex flex-col justify-between p-5 text-white">
+          <div className="relative flex flex-1 flex-col p-5 text-white">
             <div className="flex items-start justify-between gap-4">
               <div className="min-w-0">
                 <motion.h3
@@ -129,20 +127,6 @@ export const InteractiveTravelCard = React.forwardRef<
                 <ArrowUpRight className="h-5 w-5 text-white" />
               </motion.a>
             </div>
-
-            <motion.button
-              type="button"
-              onClick={onActionClick}
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-              style={{ transform: "translateZ(40px)" }}
-              className={cn(
-                "w-full rounded-2xl py-3 text-center text-sm font-semibold text-white",
-                "bg-white/10 backdrop-blur-md ring-1 ring-inset ring-white/20 hover:bg-white/18",
-              )}
-            >
-              {actionText}
-            </motion.button>
           </div>
         </div>
       </motion.div>

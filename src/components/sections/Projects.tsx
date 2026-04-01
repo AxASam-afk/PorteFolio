@@ -139,11 +139,7 @@ function ProjectCard({ p, delayMs }: { p: Project; delayMs: number }) {
             title={p.title}
             subtitle={p.description}
             imageUrl={p.imageUrl}
-            actionText="Me contacter"
             href={p.href}
-            onActionClick={() => {
-              window.location.hash = "contact";
-            }}
             className={cn("w-full max-w-[22rem]", "mx-auto")}
           />
         </div>
