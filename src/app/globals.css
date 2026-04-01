@@ -1,0 +1,93 @@
+@import "tailwindcss";
+
+:root {
+  /* Brand palette (premium/tech) */
+  --bg: #F5F5F0;
+  --ink: #1E1E2F;
+  --muted: #6D6D75;
+  --primary: #1E1E2F;
+  --secondary: #4A63FF;
+  --accent: #F2B705;
+
+  /* Surfaces */
+  --surface: rgba(255, 255, 255, 0.72);
+  --surface-strong: rgba(255, 255, 255, 0.86);
+  --stroke: rgba(30, 30, 47, 0.12);
+
+  /* Premium multilayer shadow (single source of truth) */
+  --shadow-premium:
+    0 1px 1px rgba(17, 24, 39, 0.05),
+    0 8px 18px rgba(17, 24, 39, 0.08),
+    0 22px 48px rgba(17, 24, 39, 0.12);
+}
+
+@theme inline {
+  /* Colors */
+  --color-bg: var(--bg);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-surface: var(--surface);
+  --color-surface-strong: var(--surface-strong);
+  --color-stroke: var(--stroke);
+
+  /* Fonts */
+  --font-sans: var(--font-body);
+  --font-serif: var(--font-heading);
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-heading);
+}
+
+@utility shadow-premium {
+  box-shadow: var(--shadow-premium);
+}
+
+@utility ring-premium {
+  box-shadow:
+    0 0 0 1px var(--stroke),
+    var(--shadow-premium);
+}
+
+@keyframes blur-in {
+  0% {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0px);
+    transform: translateY(0px);
+  }
+}
+
+@utility animate-blur-in {
+  animation: blur-in 700ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@utility animate-marquee {
+  animation: marquee 22s linear infinite;
+}
+
+

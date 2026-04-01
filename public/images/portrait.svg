@@ -1,0 +1,36 @@
+<svg width="900" height="1125" viewBox="0 0 900 1125" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="900" y2="1125" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F5F5F0"/>
+      <stop offset="1" stop-color="#F5F5F0"/>
+    </linearGradient>
+    <radialGradient id="halo" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(420 260) rotate(90) scale(520 520)">
+      <stop stop-color="#4A63FF" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#4A63FF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="warm" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(620 760) rotate(90) scale(520 520)">
+      <stop stop-color="#F2B705" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#F2B705" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6"/>
+    </filter>
+  </defs>
+
+  <rect width="900" height="1125" fill="url(#bg)"/>
+  <rect width="900" height="1125" fill="url(#halo)"/>
+  <rect width="900" height="1125" fill="url(#warm)"/>
+
+  <!-- Stylized premium placeholder portrait -->
+  <g opacity="0.95">
+    <path d="M450 255c86 0 156 70 156 156s-70 156-156 156-156-70-156-156 70-156 156-156Z" fill="#1E1E2F" fill-opacity="0.10"/>
+    <path d="M225 980c34-170 176-292 345-292s311 122 345 292" fill="#1E1E2F" fill-opacity="0.10"/>
+    <path d="M265 980c28-148 152-254 305-254s277 106 305 254" fill="#4A63FF" fill-opacity="0.06"/>
+  </g>
+
+  <g filter="url(#soft)" opacity="0.35">
+    <circle cx="720" cy="280" r="54" fill="#4A63FF"/>
+    <circle cx="260" cy="850" r="58" fill="#F2B705"/>
+  </g>
+</svg>
+

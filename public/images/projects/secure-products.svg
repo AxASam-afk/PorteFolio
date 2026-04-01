@@ -1,0 +1,35 @@
+<svg width="1200" height="750" viewBox="0 0 1200 750" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="750" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F5F5F0"/>
+      <stop offset="1" stop-color="#F5F5F0"/>
+    </linearGradient>
+    <radialGradient id="r1" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(360 240) rotate(35) scale(520 320)">
+      <stop stop-color="#4A63FF" stop-opacity="0.30"/>
+      <stop offset="1" stop-color="#4A63FF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="r2" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(860 520) rotate(-15) scale(520 320)">
+      <stop stop-color="#F2B705" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#F2B705" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="750" fill="url(#bg)"/>
+  <rect width="1200" height="750" fill="url(#r1)"/>
+  <rect width="1200" height="750" fill="url(#r2)"/>
+
+  <g opacity="0.9">
+    <rect x="170" y="170" width="860" height="420" rx="44" fill="#FFFFFF" fill-opacity="0.55" stroke="#1E1E2F" stroke-opacity="0.12"/>
+    <rect x="220" y="220" width="360" height="44" rx="22" fill="#1E1E2F" fill-opacity="0.07"/>
+    <rect x="220" y="286" width="520" height="18" rx="9" fill="#1E1E2F" fill-opacity="0.10"/>
+    <rect x="220" y="320" width="460" height="18" rx="9" fill="#1E1E2F" fill-opacity="0.08"/>
+    <rect x="220" y="390" width="300" height="160" rx="28" fill="#4A63FF" fill-opacity="0.10" stroke="#4A63FF" stroke-opacity="0.20"/>
+    <rect x="540" y="390" width="420" height="58" rx="29" fill="#F2B705" fill-opacity="0.14" stroke="#F2B705" stroke-opacity="0.18"/>
+    <rect x="540" y="468" width="420" height="82" rx="32" fill="#1E1E2F" fill-opacity="0.06"/>
+  </g>
+
+  <g opacity="0.55">
+    <path d="M975 235c0 34-28 62-62 62s-62-28-62-62 28-62 62-62 62 28 62 62Z" fill="#4A63FF" fill-opacity="0.20"/>
+    <path d="M916 222h-6c-12 0-22 10-22 22v14c0 12 10 22 22 22h6c12 0 22-10 22-22v-14c0-12-10-22-22-22Z" fill="#1E1E2F" fill-opacity="0.10"/>
+  </g>
+</svg>
+
