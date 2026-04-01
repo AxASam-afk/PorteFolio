@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Inter } from "next/font/google";
 import "./globals.css";
+import { EntropyBackground } from "@/components/ui/entropy-background";
 
 const heading = Cormorant_Garamond({
   variable: "--font-heading",
@@ -30,6 +31,11 @@ export default function RootLayout({
       className={`${heading.variable} ${body.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-bg text-ink selection:bg-accent/20 selection:text-ink">
+        <div className="fixed inset-0 -z-10 pointer-events-none">
+          <EntropyBackground className="absolute inset-0" />
+          <div className="absolute inset-0 bg-bg/70" />
+          <div className="absolute inset-0 bg-[radial-gradient(900px_500px_at_30%_20%,rgba(74,99,255,0.10),transparent_60%),radial-gradient(700px_450px_at_70%_35%,rgba(242,183,5,0.08),transparent_55%)]" />
+        </div>
         {children}
       </body>
     </html>

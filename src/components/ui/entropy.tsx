@@ -4,6 +4,10 @@ import { useEffect, useRef } from 'react'
 interface EntropyProps {
   className?: string
   size?: number
+  /**
+   * Couleur de base des particules (hex). Par défaut, on récupère `--ink`.
+   */
+  color?: string
 }
 
 class Particle {
@@ -84,7 +88,14 @@ class Particle {
   }
 }
 
-export function Entropy({ className = "", size = 400 }: EntropyProps) {
+function getCssVarHex(name: string, fallback: string) {
+  const value = getComputedStyle(document.documentElement)
+    .getPropertyValue(name)
+    .trim()
+  return value || fallback
+}
+
+export function Entropy({ className = "", size = 400, color }: EntropyProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
@@ -103,8 +114,7 @@ export function Entropy({ className = "", size = 400 }: EntropyProps) {
     canvas.style.height = `${size}px`
     ctx.scale(dpr, dpr)
 
-    // 使用黑色主题
-    const particleColor = '#ffffff'
+    const particleColor = color ?? getCssVarHex('--ink', '#1E1E2F')
 
     // 创建粒子网格
     const particles: Particle[] = []
@@ -184,7 +194,7 @@ export function Entropy({ className = "", size = 400 }: EntropyProps) {
         cancelAnimationFrame(animationId)
       }
     }
-  }, [size])
+  }, [size, color])
 
   return (
     <div className={`relative bg-black ${className}`} style={{ width: size, height: size }}>

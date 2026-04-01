@@ -36,7 +36,11 @@ export function EntropyBackground({ className, scale = 1.1 }: Props) {
   return (
     <div ref={hostRef} className={className} aria-hidden="true">
       <div className="absolute inset-0 grid place-items-center">
-        <Entropy className="pointer-events-none opacity-70" size={size} />
+        <Entropy
+          className="pointer-events-none bg-transparent opacity-55"
+          size={size}
+          color="#1E1E2F"
+        />
       </div>
     </div>
   )
