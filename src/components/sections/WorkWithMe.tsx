@@ -42,7 +42,7 @@ export function WorkWithMe() {
                 </TextBlurIn>
                 <Reveal delayMs={120}>
                   <p className="mt-4 max-w-2xl text-base leading-7 text-muted sm:text-lg">
-                    Si tu cherches un profil motivé, sérieux et en progression,
+                    Si vous cherchez un profil motivé, sérieux et en progression,
                     je suis partant pour contribuer à des projets concrets — en
                     cybersécurité, dev sécurisé ou support SI.
                   </p>

@@ -1,9 +1,11 @@
-import Image from "next/image";
+"use client";
+
 import Link from "next/link";
 import { ArrowUpRight, Filter, ShieldCheck } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { TextBlurIn } from "@/components/TextBlurIn";
 import { Section } from "@/components/sections/Section";
+import { InteractiveTravelCard } from "@/components/ui/3d-card";
 import { cn } from "@/lib/cn";
 
 type Category = "Cybersécurité" | "Full-stack" | "Jeu" | "Systèmes";
@@ -16,6 +18,8 @@ type Project = {
   caseMini: string;
   image: string;
   badges: string[];
+  href: string;
+  imageUrl: string;
 };
 
 const categories: Array<Category | "Tous"> = [
@@ -36,6 +40,9 @@ const projects: Project[] = [
     caseMini:
       "Objectif: sécuriser des flux CRUD (auth, validation, logs). Résultat: un socle de bonnes pratiques réutilisable.",
     image: "/images/projects/secure-products.svg",
+    imageUrl:
+      "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&w=1400&q=80",
+    href: "#contact",
     badges: ["Auth", "Intégrité", "Secure coding"],
   },
   {
@@ -47,6 +54,9 @@ const projects: Project[] = [
     caseMini:
       "Objectif: renforcer la logique et l’architecture. Résultat: un prototype jouable, itérable et documenté.",
     image: "/images/projects/unity-platformer.svg",
+    imageUrl:
+      "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=1400&q=80",
+    href: "#contact",
     badges: ["Unity", "Gameplay", "Autonomie"],
   },
   {
@@ -58,6 +68,9 @@ const projects: Project[] = [
     caseMini:
       "Problème: progression dispersée. Solution: centraliser, tagger, chercher. Résultat: routine plus régulière.",
     image: "/images/projects/ctf-dashboard.svg",
+    imageUrl:
+      "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1400&q=80",
+    href: "#contact",
     badges: ["CTF", "Organisation", "Recherche"],
   },
   {
@@ -69,6 +82,9 @@ const projects: Project[] = [
     caseMini:
       "Objectif: comprendre la reconnaissance. Résultat: sorties lisibles, triées, et prêtes à être analysées.",
     image: "/images/projects/network-scanner.svg",
+    imageUrl:
+      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1400&q=80",
+    href: "#contact",
     badges: ["Recon", "Synthèse", "Lab"],
   },
   {
@@ -80,6 +96,9 @@ const projects: Project[] = [
     caseMini:
       "Objectif: fiabiliser les routines. Résultat: contrôles plus rapides et reproductibles.",
     image: "/images/projects/hardening.svg",
+    imageUrl:
+      "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=1400&q=80",
+    href: "#contact",
     badges: ["Procédures", "Rigueur", "Sécurisation"],
   },
   {
@@ -91,6 +110,9 @@ const projects: Project[] = [
     caseMini:
       "Objectif: apprendre par la pratique. Résultat: une base de réflexion sur les choix et menaces.",
     image: "/images/projects/password-vault.svg",
+    imageUrl:
+      "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?auto=format&fit=crop&w=1400&q=80",
+    href: "#contact",
     badges: ["Crypto", "Threat model", "Prototype"],
   },
 ];
@@ -98,40 +120,36 @@ const projects: Project[] = [
 function ProjectCard({ p, delayMs }: { p: Project; delayMs: number }) {
   return (
     <Reveal delayMs={delayMs}>
-      <article
-        className={cn(
-          "group relative overflow-hidden rounded-3xl border border-stroke bg-surface shadow-premium backdrop-blur-md",
-          "transition hover:scale-[1.02]",
-        )}
-      >
-        <div className="relative aspect-[16/10] overflow-hidden">
-          <Image
-            src={p.image}
-            alt={`Visuel du projet ${p.title}`}
-            fill
-            className="object-cover transition duration-700 ease-out group-hover:scale-[1.04]"
-            sizes="(max-width: 768px) 92vw, (max-width: 1200px) 44vw, 380px"
-          />
-          <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(245,245,240,0.88),transparent_55%)]" />
-          <div className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-3xl border border-stroke bg-bg/50 px-3 py-1 text-xs font-semibold text-ink/85 backdrop-blur-md">
+      <div className="grid gap-4">
+        <div className="flex items-center justify-between gap-3">
+          <div className="inline-flex items-center gap-2 rounded-3xl border border-stroke bg-surface px-3 py-1 text-xs font-semibold text-ink/85 shadow-premium backdrop-blur-md">
             <ShieldCheck className="h-4 w-4 text-secondary" />
             {p.category}
           </div>
+          <Link
+            href="#contact"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-secondary transition hover:text-secondary/80"
+          >
+            Discuter <ArrowUpRight className="h-4 w-4" />
+          </Link>
         </div>
 
-        <div className="p-6">
-          <div className="flex items-start justify-between gap-4">
-            <h3 className="text-2xl font-semibold tracking-[-0.01em] text-ink">
-              {p.title}
-            </h3>
-            <span className="rounded-3xl border border-stroke bg-bg/40 p-2 text-ink/60 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-ink/85">
-              <ArrowUpRight className="h-5 w-5" />
-            </span>
-          </div>
+        <div style={{ perspective: "1000px" }}>
+          <InteractiveTravelCard
+            title={p.title}
+            subtitle={p.description}
+            imageUrl={p.imageUrl}
+            actionText="Me contacter"
+            href={p.href}
+            onActionClick={() => {
+              window.location.hash = "contact";
+            }}
+            className={cn("w-full max-w-[22rem]", "mx-auto")}
+          />
+        </div>
 
-          <p className="mt-3 text-sm leading-6 text-muted">{p.description}</p>
-          <p className="mt-3 text-sm leading-6 text-ink/80">{p.caseMini}</p>
-
+        <div className="rounded-3xl border border-stroke bg-surface px-5 py-4 shadow-premium backdrop-blur-md">
+          <p className="text-sm leading-6 text-ink/80">{p.caseMini}</p>
           <div className="mt-4 flex flex-wrap gap-2">
             {p.badges.map((b) => (
               <span
@@ -142,17 +160,8 @@ function ProjectCard({ p, delayMs }: { p: Project; delayMs: number }) {
               </span>
             ))}
           </div>
-
-          <div className="mt-5">
-            <Link
-              href="#contact"
-              className="inline-flex items-center gap-2 text-sm font-semibold text-secondary transition hover:text-secondary/80"
-            >
-              Discuter de ce type de projet <ArrowUpRight className="h-4 w-4" />
-            </Link>
-          </div>
         </div>
-      </article>
+      </div>
     </Reveal>
   );
 }

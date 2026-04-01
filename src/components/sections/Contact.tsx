@@ -144,7 +144,7 @@ export function Contact() {
                     type="email"
                     required
                     className="mt-2 w-full rounded-3xl border border-stroke bg-bg/40 px-4 py-3 text-sm text-ink shadow-premium outline-none focus:ring-2 focus:ring-secondary/30"
-                    placeholder="ton@email.com"
+                    placeholder="votre@email.com"
                   />
                 </label>
 
@@ -157,7 +157,7 @@ export function Contact() {
                     required
                     rows={5}
                     className="mt-2 w-full resize-none rounded-3xl border border-stroke bg-bg/40 px-4 py-3 text-sm text-ink shadow-premium outline-none focus:ring-2 focus:ring-secondary/30"
-                    placeholder="Décris ton besoin (projet, alternance, question...)"
+                    placeholder="Décrivez votre besoin (projet, alternance, question...)"
                   />
                 </label>
 
