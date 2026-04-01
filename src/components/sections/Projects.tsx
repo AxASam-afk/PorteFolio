@@ -19,6 +19,8 @@ type Project = {
   image: string;
   badges: string[];
   imageUrl: string;
+  /** Texte long optionnel affiché au verso (détails), paragraphes séparés par des lignes vides. */
+  extraContent?: string;
 };
 
 const categories: Array<Category | "Tous"> = [
@@ -30,6 +32,38 @@ const categories: Array<Category | "Tous"> = [
 ];
 
 const projects: Project[] = [
+  {
+    slug: "portfolio-samuel-lepinay",
+    title: "Portfolio personnel — site vitrine",
+    category: "Full-stack",
+    description:
+      "Site présentant mon parcours, mes projets et un moyen de contact : Next.js, interface soignée et expérience interactive.",
+    caseMini:
+      "Objectif: un site rapide, lisible et représentatif de mon profil cybersécurité & informatique. Résultat: une base Next.js (App Router) avec sections claires, fond animé, cartes projets en 3D et formulaire de contact orienté email.",
+    image: "/images/hero-bg.svg",
+    imageUrl:
+      "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=1400&q=80",
+    badges: ["Next.js", "TypeScript", "Tailwind", "Framer Motion"],
+    extraContent: `Stack et architecture
+
+Le site est construit avec Next.js (App Router), React 19 et TypeScript. Les styles utilisent Tailwind CSS v4 et une palette définie en variables CSS (couleurs, ombres, surfaces) pour garder une identité visuelle cohérente sur toute la page.
+
+Interface et contenu
+
+La page d’accueil regroupe un hero, des sections À propos, compétences (bento), projets avec études de cas, appel à l’action et contact. Le texte est pensé pour être professionnel et lisible (hiérarchie des titres, contrastes, vouvoiement sur les textes de contact).
+
+Effets et performance
+
+Un fond animé type « Entropy » (canvas 2D) couvre le site en arrière-plan, avec un voile léger pour préserver la lisibilité du texte. Les cartes projets utilisent Framer Motion : inclinaison au survol, retournement 3D au clic sur la flèche pour afficher objectifs, résumé de cas et tags — sans quitter la grille des projets.
+
+Contact
+
+Le bloc contact propose des liens mailto vers une adresse personnelle et un formulaire côté interface (comportement à brancher sur un service d’envoi si besoin en production).
+
+Qualité et évolutions
+
+Ce projet me sert aussi de laboratoire pour itérer sur l’UX, l’accessibilité de base (libellés, focus) et la qualité du code (lint, build TypeScript).`,
+  },
   {
     slug: "app-gestion-produits-securisee",
     title: "Gestion de produits — App sécurisée",
@@ -136,6 +170,23 @@ function ProjectCard({ p, delayMs }: { p: Project; delayMs: number }) {
               <>
                 <p className="text-muted">{p.description}</p>
                 <p className="mt-4 text-ink/85">{p.caseMini}</p>
+                {p.extraContent ? (
+                  <div className="mt-4 space-y-4 text-sm leading-relaxed text-ink/90">
+                    {p.extraContent.split(/\n\n+/).map((block, i) => {
+                      const lines = block.trim().split("\n");
+                      const head = lines[0] ?? "";
+                      const rest = lines.slice(1).join("\n").trim();
+                      return (
+                        <div key={i}>
+                          <p className="font-semibold text-ink">{head}</p>
+                          {rest ? (
+                            <p className="mt-1.5 whitespace-pre-line">{rest}</p>
+                          ) : null}
+                        </div>
+                      );
+                    })}
+                  </div>
+                ) : null}
                 <div className="mt-4 flex flex-wrap gap-2">
                   {p.badges.map((b) => (
                     <span
