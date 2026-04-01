@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowDownRight, Download, Mail } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { TextBlurIn } from "@/components/TextBlurIn";
-import { ThreeHeroBackground } from "@/components/three/ThreeHeroBackground";
+import { EntropyBackground } from "@/components/ui/entropy-background";
 import { cn } from "@/lib/cn";
 
 const heroImage = "/images/hero-bg.svg";
@@ -38,7 +38,6 @@ export function Hero() {
   return (
     <section className="relative overflow-hidden">
       <div className="absolute inset-0">
-        <ThreeHeroBackground className="absolute inset-0" />
         <Image
           src={heroImage}
           alt=""
@@ -47,8 +46,9 @@ export function Hero() {
           className="object-cover"
           sizes="100vw"
         />
+        <EntropyBackground className="absolute inset-0" />
         <div className="absolute inset-0 bg-[radial-gradient(1200px_600px_at_30%_20%,rgba(74,99,255,0.28),transparent_60%),radial-gradient(900px_500px_at_70%_30%,rgba(242,183,5,0.18),transparent_55%)]" />
-        <div className="absolute inset-0 bg-bg/75 backdrop-blur-[2px]" />
+        <div className="absolute inset-0 bg-bg/55 backdrop-blur-[2px]" />
       </div>
 
       <div className="relative mx-auto w-full max-w-7xl px-6 pb-24 pt-24">

@@ -6,6 +6,84 @@ interface EntropyProps {
   size?: number
 }
 
+class Particle {
+  x: number
+  y: number
+  size: number
+  order: boolean
+  velocity: { x: number; y: number }
+  originalX: number
+  originalY: number
+  influence: number
+  neighbors: Particle[]
+
+  constructor(x: number, y: number, order: boolean) {
+    this.x = x
+    this.y = y
+    this.originalX = x
+    this.originalY = y
+    this.size = 2
+    this.order = order
+    this.velocity = {
+      x: (Math.random() - 0.5) * 2,
+      y: (Math.random() - 0.5) * 2
+    }
+    this.influence = 0
+    this.neighbors = []
+  }
+
+  update(size: number) {
+    if (this.order) {
+      // 有序粒子受混沌影响的运动
+      const dx = this.originalX - this.x
+      const dy = this.originalY - this.y
+
+      // 计算来自混沌粒子的影响
+      const chaosInfluence = { x: 0, y: 0 }
+      this.neighbors.forEach(neighbor => {
+        if (!neighbor.order) {
+          const distance = Math.hypot(this.x - neighbor.x, this.y - neighbor.y)
+          const strength = Math.max(0, 1 - distance / 100)
+          chaosInfluence.x += (neighbor.velocity.x * strength)
+          chaosInfluence.y += (neighbor.velocity.y * strength)
+          this.influence = Math.max(this.influence, strength)
+        }
+      })
+
+      // 混合有序运动和混沌影响
+      this.x += dx * 0.05 * (1 - this.influence) + chaosInfluence.x * this.influence
+      this.y += dy * 0.05 * (1 - this.influence) + chaosInfluence.y * this.influence
+
+      // 影响逐渐减弱
+      this.influence *= 0.99
+    } else {
+      // 混沌运动
+      this.velocity.x += (Math.random() - 0.5) * 0.5
+      this.velocity.y += (Math.random() - 0.5) * 0.5
+      this.velocity.x *= 0.95
+      this.velocity.y *= 0.95
+      this.x += this.velocity.x
+      this.y += this.velocity.y
+
+      // 边界检查
+      if (this.x < size / 2 || this.x > size) this.velocity.x *= -1
+      if (this.y < 0 || this.y > size) this.velocity.y *= -1
+      this.x = Math.max(size / 2, Math.min(size, this.x))
+      this.y = Math.max(0, Math.min(size, this.y))
+    }
+  }
+
+  draw(ctx: CanvasRenderingContext2D, particleColor: string) {
+    const alpha = this.order ?
+      0.8 - this.influence * 0.5 :
+      0.8
+    ctx.fillStyle = `${particleColor}${Math.round(alpha * 255).toString(16).padStart(2, '0')}`
+    ctx.beginPath()
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
+    ctx.fill()
+  }
+}
+
 export function Entropy({ className = "", size = 400 }: EntropyProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
@@ -27,84 +105,6 @@ export function Entropy({ className = "", size = 400 }: EntropyProps) {
 
     // 使用黑色主题
     const particleColor = '#ffffff'
-
-    class Particle {
-      x: number
-      y: number
-      size: number
-      order: boolean
-      velocity: { x: number; y: number }
-      originalX: number
-      originalY: number
-      influence: number
-      neighbors: Particle[]
-
-      constructor(x: number, y: number, order: boolean) {
-        this.x = x
-        this.y = y
-        this.originalX = x
-        this.originalY = y
-        this.size = 2
-        this.order = order
-        this.velocity = {
-          x: (Math.random() - 0.5) * 2,
-          y: (Math.random() - 0.5) * 2
-        }
-        this.influence = 0
-        this.neighbors = []
-      }
-
-      update() {
-        if (this.order) {
-          // 有序粒子受混沌影响的运动
-          const dx = this.originalX - this.x
-          const dy = this.originalY - this.y
-
-          // 计算来自混沌粒子的影响
-          const chaosInfluence = { x: 0, y: 0 }
-          this.neighbors.forEach(neighbor => {
-            if (!neighbor.order) {
-              const distance = Math.hypot(this.x - neighbor.x, this.y - neighbor.y)
-              const strength = Math.max(0, 1 - distance / 100)
-              chaosInfluence.x += (neighbor.velocity.x * strength)
-              chaosInfluence.y += (neighbor.velocity.y * strength)
-              this.influence = Math.max(this.influence, strength)
-            }
-          })
-
-          // 混合有序运动和混沌影响
-          this.x += dx * 0.05 * (1 - this.influence) + chaosInfluence.x * this.influence
-          this.y += dy * 0.05 * (1 - this.influence) + chaosInfluence.y * this.influence
-
-          // 影响逐渐减弱
-          this.influence *= 0.99
-        } else {
-          // 混沌运动
-          this.velocity.x += (Math.random() - 0.5) * 0.5
-          this.velocity.y += (Math.random() - 0.5) * 0.5
-          this.velocity.x *= 0.95
-          this.velocity.y *= 0.95
-          this.x += this.velocity.x
-          this.y += this.velocity.y
-
-          // 边界检查
-          if (this.x < size / 2 || this.x > size) this.velocity.x *= -1
-          if (this.y < 0 || this.y > size) this.velocity.y *= -1
-          this.x = Math.max(size / 2, Math.min(size, this.x))
-          this.y = Math.max(0, Math.min(size, this.y))
-        }
-      }
-
-      draw(ctx: CanvasRenderingContext2D) {
-        const alpha = this.order ?
-          0.8 - this.influence * 0.5 :
-          0.8
-        ctx.fillStyle = `${particleColor}${Math.round(alpha * 255).toString(16).padStart(2, '0')}`
-        ctx.beginPath()
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
-        ctx.fill()
-      }
-    }
 
     // 创建粒子网格
     const particles: Particle[] = []
@@ -144,8 +144,8 @@ export function Entropy({ className = "", size = 400 }: EntropyProps) {
 
       // 更新和绘制所有粒子
       particles.forEach(particle => {
-        particle.update()
-        particle.draw(ctx)
+        particle.update(size)
+        particle.draw(ctx, particleColor)
 
         // 绘制连接线
         particle.neighbors.forEach(neighbor => {
