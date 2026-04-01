@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowDownRight, Download, Mail } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { TextBlurIn } from "@/components/TextBlurIn";
+import { ThreeHeroBackground } from "@/components/three/ThreeHeroBackground";
 import { cn } from "@/lib/cn";
 
 const heroImage = "/images/hero-bg.svg";
@@ -37,6 +38,7 @@ export function Hero() {
   return (
     <section className="relative overflow-hidden">
       <div className="absolute inset-0">
+        <ThreeHeroBackground className="absolute inset-0" />
         <Image
           src={heroImage}
           alt=""
