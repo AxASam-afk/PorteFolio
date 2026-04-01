@@ -41,14 +41,13 @@ export function Footer() {
                 title: "Info",
                 links: [
                   { label: "À propos", href: "#a-propos" },
-                  { label: "Témoignages", href: "#temoignages" },
                   { label: "Travaillons ensemble", href: "#travaillons-ensemble" },
                 ],
               },
               {
                 title: "Contact",
                 links: [
-                  { label: "Email", href: "mailto:slepinay@guardiaschool.fr" },
+                  { label: "Email", href: "mailto:samuellepinay54@gmail.com" },
                   { label: "Téléphone", href: "tel:+33629867387" },
                   {
                     label: "LinkedIn",
@@ -90,7 +89,7 @@ export function Footer() {
             </p>
             <div className="flex flex-wrap items-center gap-3">
               <Link
-                href="mailto:slepinay@guardiaschool.fr"
+                href="mailto:samuellepinay54@gmail.com"
                 className="inline-flex items-center gap-2 rounded-3xl border border-stroke bg-bg/40 px-4 py-2 text-sm font-semibold text-ink shadow-premium transition hover:scale-[1.02]"
               >
                 <Mail className="h-4 w-4 text-secondary" />

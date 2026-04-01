@@ -47,8 +47,8 @@ export function Contact() {
               {
                 icon: <Mail className="h-4 w-4" />,
                 label: "Email",
-                value: "slepinay@guardiaschool.fr",
-                href: "mailto:slepinay@guardiaschool.fr",
+                value: "samuellepinay54@gmail.com",
+                href: "mailto:samuellepinay54@gmail.com",
               },
               {
                 icon: <Phone className="h-4 w-4" />,
@@ -102,7 +102,7 @@ export function Contact() {
                 LinkedIn
               </Link>
               <Link
-                href="mailto:slepinay@guardiaschool.fr"
+                href="mailto:samuellepinay54@gmail.com"
                 className="inline-flex items-center gap-2 rounded-3xl bg-primary px-5 py-3 text-sm font-semibold text-bg shadow-premium transition hover:scale-[1.02]"
               >
                 <Mail className="h-4 w-4" />

@@ -99,10 +99,10 @@ export function Hero() {
                       Télécharger mon CV
                     </Pill>
                     <Pill
-                      href="mailto:slepinay@guardiaschool.fr"
+                      href="mailto:samuellepinay54@gmail.com"
                       icon={<Mail className="h-4 w-4" />}
                     >
-                      slepinay@guardiaschool.fr
+                      samuellepinay54@gmail.com
                     </Pill>
                   </div>
                 </div>
