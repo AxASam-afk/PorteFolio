@@ -16,6 +16,27 @@ type CaseStudy = {
   steps: Step[];
 };
 
+function TimelinePreview({ steps }: { steps: Step[] }) {
+  return (
+    <div className="rounded-2xl border border-stroke bg-bg/40 p-3">
+      <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted">
+        Aperçu timeline
+      </p>
+      <div className="mt-2 flex flex-wrap items-center gap-2">
+        {steps.map((s, idx) => (
+          <div key={`${s.title}-${idx}`} className="inline-flex items-center gap-2">
+            <span className="h-2.5 w-2.5 rounded-full bg-secondary" />
+            <span className="text-xs font-semibold text-ink/90">{s.title}</span>
+            {idx !== steps.length - 1 ? (
+              <span className="text-xs text-muted">→</span>
+            ) : null}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 const caseStudies: CaseStudy[] = [
   {
     slug: "app-gestion-produits-securisee",
@@ -100,8 +121,8 @@ export function CaseStudies() {
       </TextBlurIn>
       <Reveal delayMs={120}>
         <p className="mt-4 max-w-2xl text-base leading-7 text-muted sm:text-lg">
-          Deux projets majeurs racontés comme une mini étude de cas: problème,
-          solution, résultat — avec une timeline animée.
+          Deux projets majeurs racontés comme une mini étude de cas :
+          problème, solution, résultat — avec une timeline animée.
         </p>
       </Reveal>
 
@@ -119,11 +140,12 @@ export function CaseStudies() {
               </div>
 
               <div className="mt-4">
+                <TimelinePreview steps={cs.steps} />
                 <InteractiveTravelCard
                   title={cs.title}
-                  subtitle={cs.subtitle}
+                  subtitle={`${cs.subtitle} • Problème → Solution → Résultat`}
                   imageUrl={cs.imageUrl}
-                  className="mx-auto w-full max-w-none"
+                  className="mx-auto mt-3 w-full max-w-none"
                   details={
                     <>
                       <p className="text-sm leading-6 text-muted">{cs.context}</p>
