@@ -59,7 +59,7 @@ export function Contact() {
               {
                 icon: <MapPin className="h-4 w-4" />,
                 label: "Localisation",
-                value: "Bordeaux / Toulouse / Paris",
+                value: "Bordeaux, Toulouse et Paris",
                 href: "#",
               },
             ].map((item, i) => (

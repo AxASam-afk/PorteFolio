@@ -36,7 +36,7 @@ export function About() {
                   </div>
                   <div className="inline-flex items-center gap-2 rounded-3xl border border-stroke bg-bg/40 px-4 py-2 text-sm font-medium text-ink/80">
                     <MapPin className="h-4 w-4 text-secondary" />
-                    Bordeaux · Toulouse
+                    Bordeaux, Toulouse et Paris
                   </div>
                 </div>
               </div>
