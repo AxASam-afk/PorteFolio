@@ -58,7 +58,8 @@ export function Hero() {
               <div className="inline-flex items-center gap-3 rounded-3xl border border-stroke bg-surface px-4 py-2 shadow-premium backdrop-blur-md">
                 <span className="h-2 w-2 rounded-full bg-accent" />
                 <p className="text-sm font-medium text-ink/80">
-                  Bordeaux — Toulouse · Disponible pour projets & alternance
+                  Bordeaux — Toulouse — Paris · Disponible pour projets &
+                  alternance
                 </p>
               </div>
             </Reveal>
