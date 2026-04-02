@@ -1,22 +1,42 @@
-import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { TextBlurIn } from "@/components/TextBlurIn";
 import { Section } from "@/components/sections/Section";
+import { InteractiveTravelCard } from "@/components/ui/3d-card";
 
 type Step = { title: string; text: string };
 type CaseStudy = {
+  slug: string;
   title: string;
   subtitle: string;
-  image: string;
+  imageUrl: string;
+  context: string;
+  stack: string[];
+  extraContent?: string;
   steps: Step[];
 };
 
 const caseStudies: CaseStudy[] = [
   {
+    slug: "app-gestion-produits-securisee",
     title: "App sécurisée de gestion de produits",
     subtitle: "Du besoin fonctionnel à un socle secure coding.",
-    image: "/images/case/secure-app.svg",
+    imageUrl:
+      "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&w=1400&q=80",
+    context:
+      "Projet orienté fiabilité applicative pour renforcer un flux CRUD exposé aux erreurs métier et aux abus.",
+    stack: ["Auth", "Validation", "Logs", "Secure coding"],
+    extraContent: `Décisions clés
+
+Mise en place d'une séparation claire des responsabilités (contrôleurs, services, règles métier), avec une validation systématique des entrées.
+
+Points de sécurité
+
+Authentification robuste, contrôle d'accès explicite par action, journalisation des opérations sensibles et garde-fous d'intégrité.
+
+Bénéfices métier
+
+Des comportements plus prévisibles, une maintenance facilitée et un socle réutilisable pour accélérer les évolutions.`,
     steps: [
       {
         title: "Problème",
@@ -33,9 +53,25 @@ const caseStudies: CaseStudy[] = [
     ],
   },
   {
+    slug: "dashboard-ctf-writeups",
     title: "Dashboard CTF & writeups",
     subtitle: "S’entraîner, tracer, apprendre, restituer.",
-    image: "/images/case/ctf-story.svg",
+    imageUrl:
+      "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1400&q=80",
+    context:
+      "Projet personnel pour rendre l'apprentissage cybersécurité mesurable et plus régulier dans le temps.",
+    stack: ["CTF", "Organisation", "Méthode", "Restitution"],
+    extraContent: `Décisions clés
+
+Structuration des notes autour d'un format unique (reconnaissance, hypothèses, tests, conclusion) et catégorisation par tags.
+
+Points d'usage
+
+Recherche plus rapide des anciens cas, visibilité claire sur la progression et préparation facilitée des restitutions.
+
+Bénéfices long terme
+
+Moins de perte d'information, meilleure mémorisation des acquis et boucle d'amélioration continue.`,
     steps: [
       {
         title: "Problème",
@@ -72,57 +108,86 @@ export function CaseStudies() {
       <div className="mt-10 grid gap-6 lg:grid-cols-2">
         {caseStudies.map((cs, idx) => (
           <Reveal key={cs.title} delayMs={160 + idx * 120}>
-            <article className="overflow-hidden rounded-3xl border border-stroke bg-surface shadow-premium backdrop-blur-md">
-              <div className="relative aspect-[16/10] overflow-hidden">
-                <Image
-                  src={cs.image}
-                  alt=""
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 92vw, 520px"
-                />
-                <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(245,245,240,0.88),transparent_60%)]" />
-              </div>
-
-              <div className="p-7">
+            <article className="overflow-hidden rounded-3xl border border-stroke bg-surface p-6 shadow-premium backdrop-blur-md">
+              <div className="flex items-center justify-between gap-3">
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted">
                   Story
                 </p>
-                <h3 className="mt-2 text-2xl font-semibold tracking-[-0.01em] text-ink">
-                  {cs.title}
-                </h3>
-                <p className="mt-2 text-sm leading-6 text-muted">{cs.subtitle}</p>
+                <div className="inline-flex items-center gap-2 rounded-3xl border border-stroke bg-bg/40 px-4 py-2 text-sm font-semibold text-ink/80">
+                  Détails au verso <ArrowRight className="h-4 w-4" />
+                </div>
+              </div>
 
-                <div className="mt-7 space-y-5">
-                  {cs.steps.map((s, stepIdx) => (
-                    <Reveal
-                      key={s.title}
-                      delayMs={220 + stepIdx * 110}
-                      className="opacity-100 scale-100 translate-y-0"
-                    >
-                      <div className="grid grid-cols-[24px_1fr] gap-4">
-                        <div className="flex flex-col items-center">
-                          <div className="h-3 w-3 rounded-full bg-secondary" />
-                          {stepIdx !== cs.steps.length - 1 ? (
-                            <div className="mt-2 h-full w-px bg-stroke" />
-                          ) : null}
-                        </div>
-                        <div className="pb-1">
-                          <p className="text-sm font-semibold text-ink">
-                            {s.title}
-                          </p>
-                          <p className="mt-1 text-sm leading-6 text-muted">
-                            {s.text}
-                          </p>
-                        </div>
+              <div className="mt-4">
+                <InteractiveTravelCard
+                  title={cs.title}
+                  subtitle={cs.subtitle}
+                  imageUrl={cs.imageUrl}
+                  className="mx-auto w-full max-w-none"
+                  details={
+                    <>
+                      <p className="text-sm leading-6 text-muted">{cs.context}</p>
+
+                      <div className="mt-5 space-y-4">
+                        {cs.steps.map((s, stepIdx) => (
+                          <Reveal
+                            key={`${cs.slug}-${s.title}`}
+                            delayMs={140 + stepIdx * 100}
+                            className="opacity-100 scale-100 translate-y-0"
+                          >
+                            <div className="grid grid-cols-[24px_1fr] gap-4">
+                              <div className="flex flex-col items-center">
+                                <div className="h-3 w-3 rounded-full bg-secondary" />
+                                {stepIdx !== cs.steps.length - 1 ? (
+                                  <div className="mt-2 h-full w-px bg-stroke" />
+                                ) : null}
+                              </div>
+                              <div className="pb-1">
+                                <p className="text-sm font-semibold text-ink">
+                                  {s.title}
+                                </p>
+                                <p className="mt-1 text-sm leading-6 text-muted">
+                                  {s.text}
+                                </p>
+                              </div>
+                            </div>
+                          </Reveal>
+                        ))}
                       </div>
-                    </Reveal>
-                  ))}
-                </div>
 
-                <div className="mt-8 inline-flex items-center gap-2 rounded-3xl border border-stroke bg-bg/40 px-4 py-2 text-sm font-semibold text-ink/80">
-                  Explorer en détail <ArrowRight className="h-4 w-4" />
-                </div>
+                      {cs.extraContent ? (
+                        <div className="mt-5 space-y-4 text-sm leading-relaxed text-ink/90">
+                          {cs.extraContent.split(/\n\n+/).map((block, i) => {
+                            const lines = block.trim().split("\n");
+                            const head = lines[0] ?? "";
+                            const rest = lines.slice(1).join("\n").trim();
+                            return (
+                              <div key={i}>
+                                <p className="font-semibold text-ink">{head}</p>
+                                {rest ? (
+                                  <p className="mt-1.5 whitespace-pre-line">
+                                    {rest}
+                                  </p>
+                                ) : null}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      ) : null}
+
+                      <div className="mt-5 flex flex-wrap gap-2">
+                        {cs.stack.map((tag) => (
+                          <span
+                            key={`${cs.slug}-${tag}`}
+                            className="rounded-3xl border border-stroke bg-bg/40 px-3 py-1 text-xs font-semibold text-ink/80"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </>
+                  }
+                />
               </div>
             </article>
           </Reveal>
