@@ -156,8 +156,8 @@ export function Bento() {
             </p>
             <div className="mt-4 grid gap-3 sm:grid-cols-2">
               {[
-                { k: "Anglais", v: "A2" },
-                { k: "Espagnol", v: "Débutant" },
+                { k: "Anglais", v: "B2" },
+                { k: "Espagnol", v: "B1" },
               ].map((l) => (
                 <div
                   key={l.k}
