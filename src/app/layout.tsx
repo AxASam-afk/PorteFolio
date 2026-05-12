@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond, Inter } from "next/font/google";
 import "./globals.css";
 import { EntropyBackground } from "@/components/ui/entropy-background";
+import { Analytics } from "@vercel/analytics/next";
 
 const heading = Cormorant_Garamond({
   variable: "--font-heading",
@@ -37,6 +38,7 @@ export default function RootLayout({
           <div className="absolute inset-0 bg-[radial-gradient(900px_500px_at_30%_20%,rgba(74,99,255,0.10),transparent_60%),radial-gradient(700px_450px_at_70%_35%,rgba(242,183,5,0.08),transparent_55%)]" />
         </div>
         {children}
+        <Analytics />
       </body>
     </html>
   );
