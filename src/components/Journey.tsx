@@ -9,7 +9,7 @@ export function Journey() {
           <div key={step.title} className="border-t border-line-2 pt-6">
             <div className="font-mono text-[13px] text-faint">{step.period}</div>
             <h3 className="mt-2 font-display text-2xl font-semibold">{step.title}</h3>
-            <p className="mt-2 text-[15px] leading-relaxed text-muted">{step.detail}</p>
+            {step.detail && <p className="mt-2 text-[15px] leading-relaxed text-muted">{step.detail}</p>}
           </div>
         ))}
       </div>

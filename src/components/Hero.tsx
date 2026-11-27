@@ -1,23 +1,10 @@
-import { nav, site } from "@/data/site";
+import { site } from "@/data/site";
+import { SiteHeader } from "./SiteHeader";
 
 export function Hero() {
   return (
     <section className="dot-grid border-b border-line">
-      <header className="mx-auto flex max-w-[1160px] flex-wrap items-center justify-between gap-4 px-6 py-5 sm:px-8">
-        <a href="#" className="flex items-center gap-2.5 font-semibold text-ink">
-          <span className="flex h-9 w-9 items-center justify-center rounded-[10px] bg-accent font-display font-bold text-on-accent">
-            {site.initials}
-          </span>
-          {site.name}
-        </a>
-        <nav aria-label="Navigation principale" className="flex flex-wrap gap-6 text-sm">
-          {nav.map((item) => (
-            <a key={item.href} href={item.href} className="text-muted transition-colors hover:text-ink">
-              {item.label}
-            </a>
-          ))}
-        </nav>
-      </header>
+      <SiteHeader />
 
       <div className="mx-auto flex max-w-[1160px] flex-col gap-8 px-6 pb-24 pt-16 sm:px-8 sm:pt-[72px]">
         <span className="animate-rise inline-flex items-center gap-2.5 self-start rounded-full border border-line-2 bg-surface px-3.5 py-2 text-sm">
