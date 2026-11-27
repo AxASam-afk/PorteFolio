@@ -4,17 +4,12 @@ import Link from "next/link";
 import { useState } from "react";
 import { journey, projects } from "@/data/site";
 
-// Scores SUS réels des 5 participants au test de Platinum Ops
-const sus = [95, 77.5, 90, 92.5, 95];
-const pts = sus.map((s, i) => ({ x: 20 + i * 90, y: 150 - (s - 60) * 3.25 }));
-const path = pts
-  .map((p, i) => {
-    if (i === 0) return `M${p.x},${p.y}`;
-    const prev = pts[i - 1];
-    const cx = (prev.x + p.x) / 2;
-    return `C${cx},${prev.y} ${cx},${p.y} ${p.x},${p.y}`;
-  })
-  .join(" ");
+// Faits réels (CV et pitch du vault)
+const terminal = [
+  { cmd: "whoami", out: "Samuel Lepinay — étudiant ESGI Toulouse" },
+  { cmd: "cat experience.txt", out: "Stage support SI chez Adera (2 mois)" },
+  { cmd: "cat recherche.txt", out: "Alternance : support IT, réseau, cyber ou dev web" },
+];
 
 const dots = ["bg-accent", "bg-sky-400", "bg-pink-400", "bg-amber-300"];
 
@@ -39,8 +34,8 @@ function Overview() {
         <div className="flex gap-6 sm:gap-8">
           {[
             { value: String(projects.length), label: "Projets" },
-            { value: "90", label: "Score SUS" },
             { value: "2", label: "Mois de stage IT" },
+            { value: "3", label: "Ans de Bachelor" },
           ].map((s) => (
             <div key={s.label}>
               <div className="font-display text-3xl sm:text-[40px] sm:leading-none">{s.value}</div>
@@ -71,35 +66,21 @@ function Overview() {
           </ul>
         </div>
 
-        <div className="glass rounded-2xl p-4">
-          <div className="flex items-center justify-between text-sm">
-            <span className="font-medium">Score SUS — Platinum Ops</span>
-            <span className="rounded-full bg-white/10 px-2.5 py-1 text-xs">5 testeurs</span>
+        <div className="glass flex flex-col rounded-2xl p-4">
+          <div className="flex items-center gap-1.5" aria-hidden="true">
+            <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
+            <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
+            <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
+            <span className="ml-2 font-mono text-xs text-faint">terminal</span>
           </div>
-          <svg
-            viewBox="0 0 400 160"
-            className="mt-3 h-[150px] w-full"
-            preserveAspectRatio="none"
-            role="img"
-            aria-label="Scores SUS des 5 testeurs : 95, 77,5, 90, 92,5 et 95"
-          >
-            <defs>
-              <linearGradient id="sus-line" x1="0" x2="1">
-                <stop offset="0" stopColor="#7c7dff" />
-                <stop offset="1" stopColor="#f472b6" />
-              </linearGradient>
-            </defs>
-            {[40, 80, 120].map((y) => (
-              <line key={y} x1="0" x2="400" y1={y} y2={y} stroke="rgba(255,255,255,0.06)" />
-            ))}
-            <path d={path} fill="none" stroke="url(#sus-line)" strokeWidth="3" />
-            {pts.map((p, i) => (
-              <circle key={i} cx={p.x} cy={p.y} r="4" fill="#050509" stroke="#a5a6ff" strokeWidth="2" />
-            ))}
-          </svg>
-          <div className="mt-1 flex justify-between px-2 font-mono text-[11px] text-faint">
-            {sus.map((s, i) => (
-              <span key={i}>P{i + 1}</span>
+          <div className="mt-3 flex flex-col gap-2.5 font-mono text-[13px] leading-relaxed">
+            {terminal.map((line) => (
+              <div key={line.cmd}>
+                <div>
+                  <span className="text-accent-text">$</span> {line.cmd}
+                </div>
+                <div className="text-muted">{line.out}</div>
+              </div>
             ))}
           </div>
         </div>
