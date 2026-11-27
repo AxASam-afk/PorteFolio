@@ -303,4 +303,4 @@ export const journey = [
   },
 ];
 
-export const languages = "Anglais intermédiaire · Espagnol débutant";
+export const languages = "Anglais B2 · Espagnol B1";
