@@ -1,43 +1,44 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Inter } from "next/font/google";
+import { JetBrains_Mono, Manrope, Poppins } from "next/font/google";
+import { site } from "@/data/site";
 import "./globals.css";
-import { EntropyBackground } from "@/components/ui/entropy-background";
 
-const heading = Cormorant_Garamond({
-  variable: "--font-heading",
+const manrope = Manrope({ variable: "--font-manrope", subsets: ["latin"] });
+const poppins = Poppins({
+  variable: "--font-poppins",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600"],
+});
+const jetbrains = JetBrains_Mono({
+  variable: "--font-jetbrains",
+  subsets: ["latin"],
+  weight: ["500"],
 });
 
-const body = Inter({
-  variable: "--font-body",
-  subsets: ["latin"],
-});
+const description =
+  "Portfolio de Samuel Lepinay, étudiant en Bachelor Systèmes & Cybersécurité à l'ESGI Toulouse, en recherche d'alternance.";
 
 export const metadata: Metadata = {
-  title: "Samuel Lepinay — Cybersécurité & Informatique",
-  description:
-    "Portfolio de Samuel Lepinay, étudiant en cybersécurité & informatique. Projets, compétences, expériences et contact.",
+  metadataBase: new URL(site.url),
+  title: `${site.name} — Systèmes, réseaux & cybersécurité`,
+  description,
+  openGraph: {
+    title: `${site.name} — Portfolio`,
+    description,
+    url: site.url,
+    siteName: site.name,
+    locale: "fr_FR",
+    type: "website",
+  },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html
       lang="fr"
-      className={`${heading.variable} ${body.variable} h-full antialiased`}
+      className={`${manrope.variable} ${poppins.variable} ${jetbrains.variable} antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-bg text-ink selection:bg-accent/20 selection:text-ink">
-        <div className="fixed inset-0 -z-10 pointer-events-none">
-          <EntropyBackground className="absolute inset-0" />
-          <div className="absolute inset-0 bg-bg/70" />
-          <div className="absolute inset-0 bg-[radial-gradient(900px_500px_at_30%_20%,rgba(74,99,255,0.10),transparent_60%),radial-gradient(700px_450px_at_70%_35%,rgba(242,183,5,0.08),transparent_55%)]" />
-        </div>
-        {children}
-      </body>
+      <body className="min-h-screen bg-bg font-sans text-ink">{children}</body>
     </html>
   );
 }

@@ -1,23 +1,25 @@
-import { About } from "@/components/sections/About";
-import { Bento } from "@/components/sections/Bento";
-import { CaseStudies } from "@/components/sections/CaseStudies";
-import { Contact } from "@/components/sections/Contact";
-import { Footer } from "@/components/sections/Footer";
-import { Hero } from "@/components/sections/Hero";
-import { Projects } from "@/components/sections/Projects";
-import { WorkWithMe } from "@/components/sections/WorkWithMe";
+import { About } from "@/components/About";
+import { ContactCta } from "@/components/ContactCta";
+import { Domains } from "@/components/Domains";
+import { Hero } from "@/components/Hero";
+import { Journey } from "@/components/Journey";
+import { Projects } from "@/components/Projects";
+import { SiteFooter } from "@/components/SiteHeader";
+import { SkillsStrip } from "@/components/SkillsStrip";
 
 export default function Home() {
   return (
-    <main className="flex-1">
+    <>
       <Hero />
-      <About />
-      <Bento />
-      <Projects />
-      <CaseStudies />
-      <WorkWithMe />
-      <Contact />
-      <Footer />
-    </main>
+      <main>
+        <SkillsStrip />
+        <About />
+        <Domains />
+        <Projects />
+        <Journey />
+        <ContactCta />
+      </main>
+      <SiteFooter />
+    </>
   );
 }
