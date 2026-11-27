@@ -1,23 +1,28 @@
-import { About } from "@/components/sections/About";
-import { Bento } from "@/components/sections/Bento";
-import { CaseStudies } from "@/components/sections/CaseStudies";
-import { Contact } from "@/components/sections/Contact";
-import { Footer } from "@/components/sections/Footer";
-import { Hero } from "@/components/sections/Hero";
-import { Projects } from "@/components/sections/Projects";
-import { WorkWithMe } from "@/components/sections/WorkWithMe";
+import { ContactCta } from "@/components/ContactCta";
+import { Hero } from "@/components/Hero";
+import { Journey } from "@/components/Journey";
+import { Projects } from "@/components/Projects";
+import { SkillsStrip } from "@/components/SkillsStrip";
+import { site } from "@/data/site";
 
 export default function Home() {
   return (
-    <main className="flex-1">
+    <>
       <Hero />
-      <About />
-      <Bento />
-      <Projects />
-      <CaseStudies />
-      <WorkWithMe />
-      <Contact />
-      <Footer />
-    </main>
+      <main>
+        <SkillsStrip />
+        <Projects />
+        <Journey />
+        <ContactCta />
+      </main>
+      <footer className="border-t border-line">
+        <div className="mx-auto flex max-w-[1160px] flex-wrap justify-between gap-3 px-6 py-6 font-mono text-[13px] text-faint sm:px-8">
+          <span>© {new Date().getFullYear()} {site.name}</span>
+          <a href={site.github} className="hover:text-ink">
+            github.com/AxASam-afk
+          </a>
+        </div>
+      </footer>
+    </>
   );
 }
