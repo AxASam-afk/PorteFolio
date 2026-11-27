@@ -1,22 +1,12 @@
-import { Fragment } from "react";
 import { skills } from "@/data/site";
 
 export function SkillsStrip() {
   return (
-    <div className="border-b border-line">
-      <ul
-        aria-label="Compétences principales"
-        className="mx-auto flex max-w-[1160px] flex-wrap justify-center gap-x-10 gap-y-3 px-6 py-6 font-display text-[22px] font-semibold text-faint sm:px-8"
-      >
-        {skills.map((skill, i) => (
-          <Fragment key={skill}>
-            {i > 0 && (
-              <li aria-hidden="true" className="text-accent-text">
-                ✦
-              </li>
-            )}
-            <li>{skill}</li>
-          </Fragment>
+    <div className="mx-auto max-w-[1000px] px-6 sm:px-8">
+      <p className="text-center text-sm text-faint">Les outils que j&apos;utilise au quotidien</p>
+      <ul className="mt-6 flex flex-wrap items-center justify-center gap-x-12 gap-y-5 font-display text-xl font-semibold text-ink/90 sm:text-2xl">
+        {skills.map((skill) => (
+          <li key={skill}>{skill}</li>
         ))}
       </ul>
     </div>

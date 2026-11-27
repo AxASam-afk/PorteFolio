@@ -5,9 +5,9 @@ export const site = {
   name: "Samuel Lepinay",
   initials: "SL",
   url: "https://porte-folio-sand.vercel.app",
-  status: "Alternance · 3 j entreprise / 2 j école · Disponible immédiatement",
-  heroTitle: ["Admin sys.", "Réseaux."],
-  heroAccent: "Sécurité.",
+  status: "Recherche d'alternance · Disponible immédiatement",
+  heroGradient: "Faire tourner",
+  heroRest: "et sécuriser les systèmes",
   intro:
     "Étudiant en Bachelor Informatique, Systèmes & Cybersécurité à l'ESGI Toulouse. Stage en support IT chez Adera, CTF sur Root-Me et TryHackMe : je cherche une alternance en support IT, réseau, cybersécurité ou développement web.",
   email: "samuellepinay54@gmail.com",
@@ -26,7 +26,7 @@ export const nav = [
   { label: "Contact", href: "/#contact" },
 ];
 
-export const skills = ["Linux", "Réseau local", "VPN & Wi-Fi", "Packet Tracer", "Python", "Java", "C", "SQL", "React / Next.js", "OSINT"];
+export const skills = ["Linux", "Packet Tracer", "Python", "Java", "C", "SQL", "Next.js", "Figma"];
 
 export type Link = { label: string; href: string };
 

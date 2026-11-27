@@ -45,16 +45,17 @@ export default async function ProjectPage({ params }: Props) {
 
   return (
     <>
-      <div className="dot-grid border-b border-line">
+      <div className="relative border-b border-line">
+        <div aria-hidden="true" className="stars pointer-events-none absolute inset-0 opacity-70" />
         <SiteHeader />
-        <div className="mx-auto flex max-w-[1160px] flex-col gap-6 px-6 pb-16 pt-10 sm:px-8">
+        <div className="relative mx-auto flex max-w-[1160px] flex-col gap-6 px-6 pb-16 pt-10 sm:px-8">
           <Link href="/#projets" className="self-start font-mono text-sm text-faint hover:text-ink">
             ← Tous les projets
           </Link>
           <div className="font-mono text-[13px] text-accent-text">
             {String(index + 1).padStart(2, "0")} — {project.category}
           </div>
-          <h1 className="max-w-[900px] font-display text-[clamp(2.75rem,7vw,4.75rem)] font-bold leading-[0.98] tracking-[-0.04em]">
+          <h1 className="max-w-[900px] font-display text-[clamp(2.5rem,6vw,4.25rem)] font-medium leading-[1.05] tracking-[-0.02em]">
             {project.title}
           </h1>
           <p className="max-w-[720px] text-lg leading-relaxed text-muted">{project.summary}</p>
@@ -94,7 +95,7 @@ export default async function ProjectPage({ params }: Props) {
           <Block title="Résultats" items={project.results} />
         </div>
 
-        <aside className="flex min-w-0 flex-[1_1_280px] flex-col gap-4 self-start rounded-3xl border border-line bg-surface p-7">
+        <aside className="flex min-w-0 flex-[1_1_280px] flex-col gap-4 self-start glass rounded-3xl p-7">
           <h2 className="font-display text-xl font-semibold">Ressources</h2>
           <ul className="flex flex-col gap-3">
             {project.links.map((link) => (
@@ -116,10 +117,10 @@ export default async function ProjectPage({ params }: Props) {
       <div className="mx-auto max-w-[1160px] px-6 pb-20 sm:px-8">
         <Link
           href={`/projets/${next.slug}`}
-          className="flex flex-wrap items-center justify-between gap-4 rounded-3xl bg-accent p-8 text-on-accent transition hover:brightness-110"
+          className="btn-glow flex flex-wrap items-center justify-between gap-4 rounded-3xl p-8 transition hover:brightness-110"
         >
           <span className="font-mono text-sm">Projet suivant</span>
-          <span className="font-display text-3xl font-bold tracking-[-0.02em]">{next.title} →</span>
+          <span className="font-display text-3xl font-medium">{next.title} →</span>
         </Link>
       </div>
       <SiteFooter />

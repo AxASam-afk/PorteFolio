@@ -1,22 +1,22 @@
 @import "tailwindcss";
 
-/* Palette E1 — Graphite & cuivre */
+/* Thème « espace indigo » */
 @theme {
-  --color-bg: #0f1115;
-  --color-surface: #171a20;
-  --color-surface-2: #121418;
-  --color-line: #262a33;
-  --color-line-2: #3a3f4a;
-  --color-ink: #f4f1ec;
-  --color-muted: #cfcac2;
-  --color-faint: #9a968f;
-  --color-accent: #e0a46b;
-  --color-accent-text: #e9b888;
-  --color-on-accent: #1a1208;
+  --color-bg: #050509;
+  --color-surface: #0d0d16;
+  --color-surface-2: #09090f;
+  --color-line: #1c1c2b;
+  --color-line-2: #2a2a3d;
+  --color-ink: #f5f5fa;
+  --color-muted: #b4b4c6;
+  --color-faint: #8a8aa0;
+  --color-accent: #5b5cf0;
+  --color-accent-text: #a5a6ff;
+  --color-on-accent: #ffffff;
   --color-ok: #4ade80;
 
-  --font-sans: var(--font-inter), system-ui, sans-serif;
-  --font-display: var(--font-space-grotesk), system-ui, sans-serif;
+  --font-sans: var(--font-manrope), system-ui, sans-serif;
+  --font-display: var(--font-poppins), system-ui, sans-serif;
   --font-mono: var(--font-jetbrains), ui-monospace, monospace;
 }
 
@@ -32,12 +32,51 @@ body {
 
 ::selection {
   background: var(--color-accent);
-  color: var(--color-on-accent);
+  color: #fff;
 }
 
-@utility dot-grid {
-  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-  background-size: 28px 28px;
+/* Champ d'étoiles en CSS pur */
+@utility stars {
+  background-image:
+    radial-gradient(1.5px 1.5px at 20px 30px, rgba(255, 255, 255, 0.7), transparent 60%),
+    radial-gradient(1px 1px at 120px 80px, rgba(255, 255, 255, 0.5), transparent 60%),
+    radial-gradient(1.5px 1.5px at 200px 160px, rgba(190, 190, 255, 0.6), transparent 60%),
+    radial-gradient(1px 1px at 60px 210px, rgba(255, 255, 255, 0.4), transparent 60%),
+    radial-gradient(2px 2px at 260px 60px, rgba(255, 255, 255, 0.35), transparent 60%),
+    radial-gradient(1px 1px at 170px 250px, rgba(255, 255, 255, 0.5), transparent 60%);
+  background-size: 300px 300px;
+}
+
+/* Carte « verre » */
+@utility glass {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.015));
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+@utility text-gradient {
+  background: linear-gradient(90deg, #7c7dff, #c3c4ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Bouton lumineux */
+@utility btn-glow {
+  background: linear-gradient(180deg, #7172ff, #4a4be0);
+  color: #fff;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    0 0 0 1px rgba(124, 125, 255, 0.5),
+    0 8px 32px rgba(91, 92, 240, 0.45);
+}
+
+@utility btn-ghost {
+  background: rgba(255, 255, 255, 0.03);
+  color: #fff;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 0 0 1px rgba(124, 125, 255, 0.45);
 }
 
 @keyframes rise {
@@ -52,7 +91,35 @@ body {
 }
 
 @utility animate-rise {
-  animation: rise 700ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation: rise 800ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@utility animate-float {
+  animation: float 5s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@utility animate-twinkle {
+  animation: twinkle 6s ease-in-out infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {

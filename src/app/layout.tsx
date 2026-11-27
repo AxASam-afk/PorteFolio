@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google";
+import { JetBrains_Mono, Manrope, Poppins } from "next/font/google";
 import { site } from "@/data/site";
 import "./globals.css";
 
-const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
+const manrope = Manrope({ variable: "--font-manrope", subsets: ["latin"] });
+const poppins = Poppins({
+  variable: "--font-poppins",
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
+  weight: ["400", "500", "600"],
 });
 const jetbrains = JetBrains_Mono({
   variable: "--font-jetbrains",
@@ -36,7 +36,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html
       lang="fr"
-      className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrains.variable} antialiased`}
+      className={`${manrope.variable} ${poppins.variable} ${jetbrains.variable} antialiased`}
     >
       <body className="min-h-screen bg-bg font-sans text-ink">{children}</body>
     </html>

@@ -13,7 +13,7 @@ function NetworkVisual() {
         ))}
       </div>
       <span className="w-8 border-t-2 border-dashed border-accent sm:w-12" />
-      <span className="rounded-[14px] bg-accent px-4 py-[18px] font-bold text-on-accent">SW1</span>
+      <span className="rounded-[14px] bg-accent px-4 py-[18px] font-semibold text-on-accent">SW1</span>
       <span className="hidden w-12 border-t-2 border-dashed border-accent sm:block" />
       <span className={`${box} hidden bg-line sm:block`}>192.168.10.0/24</span>
     </div>
@@ -28,7 +28,7 @@ function SusVisual() {
     <div className="flex h-full w-full flex-col gap-3 p-6">
       <div className="flex items-baseline justify-between">
         <span className="text-xs text-faint">Score SUS moyen</span>
-        <span className="font-display text-3xl font-bold text-accent-text">
+        <span className="font-display text-3xl font-semibold text-accent-text">
           90<span className="text-base text-faint">/100</span>
         </span>
       </div>
