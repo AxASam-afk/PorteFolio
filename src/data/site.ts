@@ -30,6 +30,9 @@ export const skills = ["Linux", "Packet Tracer", "Python", "Java", "C", "SQL", "
 
 export type Link = { label: string; href: string };
 
+export type Step = { actor: string; label: string; detail: string };
+export type Notion = { name: string; explanation: string; source: Link };
+
 export type Project = {
   slug: string;
   category: string;
@@ -41,6 +44,8 @@ export type Project = {
   results: string[];
   image?: { src: string; alt: string; width: number; height: number; caption: string };
   links: Link[];
+  diagram: { title: string; steps: Step[] };
+  notions: Notion[];
 };
 
 export const projects: Project[] = [
@@ -77,6 +82,37 @@ export const projects: Project[] = [
       { label: "Maquettes Figma — phase 2", href: "https://www.figma.com/design/COdOEBj6G6MlszESmAibdG/Maquette?node-id=44-300&t=oUALQaGYZrBurEue-1" },
       { label: "Livrables complets sur GitHub", href: vaultFile("Modélisation/Platinum Ops — Livrables IHM.md") },
     ],
+    diagram: {
+      title: "La démarche UCD appliquée au projet",
+      steps: [
+        { actor: "Phase 1", label: "Comprendre", detail: "Interview de 8 questions, observation et shadowing des chasseurs de trophées." },
+        { actor: "Phase 2", label: "Spécifier", detail: "6 personas et leurs frustrations : trophées ratables, guides obsolètes, manque de temps." },
+        { actor: "Phase 3", label: "Concevoir", detail: "Maquettes et prototype interactif sur Figma (phases 1 et 2)." },
+        { actor: "Phase 4", label: "Évaluer", detail: "Test avec 5 participants (SUS 90/100) et revue heuristique : 13 changements pour l'itération suivante." },
+      ],
+    },
+    notions: [
+      {
+        name: "Conception centrée utilisateur (UCD)",
+        explanation: "Processus itératif en 4 phases (comprendre, spécifier, concevoir, évaluer) où les besoins réels des utilisateurs guident chaque décision. Formalisé par la norme ISO 9241-210.",
+        source: { label: "Cours UCD", href: vaultFile("UX/UCD.md") },
+      },
+      {
+        name: "Heuristiques de Nielsen",
+        explanation: "10 règles pour évaluer une interface. Exemple : « contrôle et liberté » demande une sortie de secours, d'où le constat qu'il manquait des boutons retour.",
+        source: { label: "Cours Nielsen", href: vaultFile("Modélisation/Les heuristiques de Nielsen.md") },
+      },
+      {
+        name: "Personas",
+        explanation: "Profils synthétiques qui représentent les différents types d'utilisateurs, pour garder une image concrète de la cible pendant toute la conception.",
+        source: { label: "Notes interview", href: vaultFile("Modélisation/Projets.md") },
+      },
+      {
+        name: "Questionnaire SUS",
+        explanation: "10 affirmations notées de 1 à 5, converties en un score sur 100. La moyenne de référence est 68, et 80,3 correspond à la note « A ».",
+        source: { label: "Livrables IHM", href: vaultFile("Modélisation/Platinum Ops — Livrables IHM.md") },
+      },
+    ],
   },
   {
     slug: "tp-infrastructure-reseau",
@@ -107,6 +143,38 @@ export const projects: Project[] = [
       caption: "Topologie en étoile sous Packet Tracer",
     },
     links: [{ label: "Compte rendu complet sur GitHub", href: vaultFile("Réseaux/TP_INFRA_SAMUEL_LEPINAY.md") }],
+    diagram: {
+      title: "Ce qui se passe quand PC-A pingue PC-B",
+      steps: [
+        { actor: "PC-A", label: "Même réseau ?", detail: "IP AND masque : 192.168.10.20 est dans 192.168.10.0/24, pas besoin de passerelle." },
+        { actor: "PC-A → tous", label: "ARP Request", detail: "Broadcast « Qui a 192.168.10.20 ? ». Le switch l'envoie sur tous les ports sauf celui d'entrée." },
+        { actor: "PC-B → PC-A", label: "ARP Reply", detail: "PC-B répond avec son adresse MAC, que PC-A garde dans son cache ARP (arp -a)." },
+        { actor: "SW1", label: "Table MAC", detail: "Le switch apprend « MAC source → port » et transmet ensuite directement sur Fa0/2." },
+        { actor: "PC-B → PC-A", label: "Réponse ICMP", detail: "4 paquets envoyés, 4 reçus, 0 % de perte." },
+      ],
+    },
+    notions: [
+      {
+        name: "Topologie en étoile",
+        explanation: "Chaque machine est reliée à un équipement central (le switch). Une panne de câble n'isole qu'une machine, mais le switch est un point unique de défaillance.",
+        source: { label: "Cours topologies", href: vaultFile("Architecture/04 - Topologies physiques et logiques.md") },
+      },
+      {
+        name: "Adressage IPv4 et masque",
+        explanation: "Une adresse sur 32 bits, découpée par le masque en partie réseau et partie hôte. En /24, on a 254 hôtes utilisables, de .1 à .254.",
+        source: { label: "Cours adressage IPv4", href: vaultFile("Architecture/12 - Adressage IPv4.md") },
+      },
+      {
+        name: "Switch et table MAC",
+        explanation: "Équipement de couche 2 qui apprend quelle adresse MAC se trouve derrière quel port, puis n'envoie les trames que vers le bon port.",
+        source: { label: "Cours switch et ARP", href: vaultFile("Architecture/10 - Switch, table MAC et ARP.md") },
+      },
+      {
+        name: "Protocole ARP",
+        explanation: "Fait le lien entre une adresse IP (couche 3) et une adresse MAC (couche 2) sur le réseau local : requête en broadcast, réponse en unicast, résultat en cache.",
+        source: { label: "Cours switch et ARP", href: vaultFile("Architecture/10 - Switch, table MAC et ARP.md") },
+      },
+    ],
   },
   {
     slug: "travelnow",
@@ -126,6 +194,37 @@ export const projects: Project[] = [
     ],
     results: ["Rapport de modélisation complet avec justification des choix."],
     links: [{ label: "Rapport complet sur GitHub", href: vaultFile("Professionnel/rapport_travelnow.md") }],
+    diagram: {
+      title: "Du besoin à la base de données",
+      steps: [
+        { actor: "MCD", label: "Entités", detail: "Utilisateur, Service, Réservation, LigneReservation et Paiement, avec leurs attributs." },
+        { actor: "MCD", label: "Cardinalités", detail: "Un utilisateur fait 0,N réservations ; une réservation contient 1,N lignes et 0,N paiements." },
+        { actor: "MLD", label: "Tables et clés", detail: "Chaque entité devient une table ; les associations 1,N deviennent des clés étrangères côté N." },
+        { actor: "SQL", label: "Requêtes", detail: "INSERT, UPDATE, SELECT avec JOIN, et la réservation créée dans une transaction." },
+      ],
+    },
+    notions: [
+      {
+        name: "MCD (méthode Merise)",
+        explanation: "Représentation abstraite des données avec des entités et des associations, indépendante du SGBD utilisé.",
+        source: { label: "Cours modélisation", href: vaultFile("Modélisation/Projet modélisation base de données.md") },
+      },
+      {
+        name: "Cardinalités",
+        explanation: "Disent combien de fois une entité participe à une association : 0,1, 1,1, 0,N ou 1,N.",
+        source: { label: "Cours modélisation", href: vaultFile("Modélisation/Projet modélisation base de données.md") },
+      },
+      {
+        name: "Clés primaires et étrangères",
+        explanation: "La clé primaire identifie une ligne de façon unique ; la clé étrangère référence la clé primaire d'une autre table.",
+        source: { label: "Cours BDD relationnelles", href: vaultFile("Modélisation/Les bases de données relationnelles.md") },
+      },
+      {
+        name: "Passage MCD → MLD",
+        explanation: "Entité → table, identifiant → clé primaire, association 1,N → clé étrangère côté N, association N,M → table d'association.",
+        source: { label: "Cours modélisation", href: vaultFile("Modélisation/Projet modélisation base de données.md") },
+      },
+    ],
   },
   {
     slug: "carnet-de-contacts",
@@ -145,6 +244,38 @@ export const projects: Project[] = [
     ],
     results: ["Programme complet et commenté, disponible avec son code source."],
     links: [{ label: "Code et explications sur GitHub", href: vaultFile("Language C/Cours/Projet Carnet de Contacts.md") }],
+    diagram: {
+      title: "Le déroulement du programme",
+      steps: [
+        { actor: "Démarrage", label: "charger()", detail: "Lit contacts.txt ligne par ligne avec fgets, et coupe nom et téléphone sur « ; » avec strchr." },
+        { actor: "Boucle", label: "Menu", detail: "Un switch dans une boucle do…while : ajouter, lister, rechercher, supprimer, sauvegarder, quitter." },
+        { actor: "Ajout", label: "realloc", detail: "Si le tableau est plein, sa capacité double, via un pointeur temporaire pour ne rien perdre en cas d'échec." },
+        { actor: "Recherche / suppression", label: "strstr, memmove", detail: "strstr trouve un morceau de nom ; memmove décale les contacts suivants." },
+        { actor: "Fin", label: "sauvegarder()", detail: "Écrit chaque contact avec fprintf, puis libère la mémoire avec free." },
+      ],
+    },
+    notions: [
+      {
+        name: "Structures et typedef",
+        explanation: "Regrouper plusieurs champs (nom, téléphone) dans un type Contact, et passer un pointeur pour modifier le carnet (accès avec ->).",
+        source: { label: "Cours structures", href: vaultFile("Language C/Cours/Structures et Types Composés.md") },
+      },
+      {
+        name: "Allocation dynamique",
+        explanation: "malloc et realloc réservent la mémoire sur le tas à l'exécution. Règle : allouer, tester, utiliser, libérer, et ne jamais écrire p = realloc(p, …).",
+        source: { label: "Cours mémoire", href: vaultFile("Language C/Cours/Mémoire et Allocation Dynamique.md") },
+      },
+      {
+        name: "Chaînes de caractères",
+        explanation: "strstr renvoie la première occurrence d'une sous-chaîne, ou NULL si elle est absente.",
+        source: { label: "Cours chaînes", href: vaultFile("Language C/Cours/Chaînes de Caractères.md") },
+      },
+      {
+        name: "Fichiers",
+        explanation: "Un fichier se manipule via un flux FILE * : fopen, lecture ou écriture (fgets, fprintf), puis fclose, en testant toujours NULL.",
+        source: { label: "Cours fichiers", href: vaultFile("Language C/Exo/Fichiers.md") },
+      },
+    ],
   },
 ];
 

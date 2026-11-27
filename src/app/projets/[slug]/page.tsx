@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { CourseNotions, ProjectDiagram } from "@/components/ProjectExplainer";
 import { SiteFooter, SiteHeader } from "@/components/SiteHeader";
 import { projects } from "@/data/site";
 
@@ -113,6 +114,11 @@ export default async function ProjectPage({ params }: Props) {
           </ul>
         </aside>
       </main>
+
+      <div className="mx-auto flex max-w-[1160px] flex-col gap-16 px-6 pb-16 sm:px-8">
+        <ProjectDiagram diagram={project.diagram} />
+        <CourseNotions notions={project.notions} />
+      </div>
 
       <div className="mx-auto max-w-[1160px] px-6 pb-20 sm:px-8">
         <Link
