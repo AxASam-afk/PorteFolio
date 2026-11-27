@@ -35,7 +35,6 @@ export type Project = {
   category: string;
   title: string;
   summary: string;
-  visual?: "network" | "sus";
   tags: string[];
   context: string;
   work: string[];
@@ -50,8 +49,7 @@ export const projects: Project[] = [
     category: "UX / IHM · Projet ESGI",
     title: "Platinum Ops",
     summary:
-      "Application web pour chasseurs de trophées PlayStation : maquettes Figma, interviews, personas et test utilisateur. Score SUS de 90/100.",
-    visual: "sus",
+      "Application web pour chasseurs de trophées PlayStation : interviews, personas, maquettes Figma et test utilisateur.",
     tags: ["Figma", "UX research", "SUS", "Nielsen"],
     context:
       "Platinum Ops est une application web destinée aux chasseurs de trophées PlayStation. Synchronisée avec le compte PSN, elle centralise la progression, la rareté des platines, le temps estimé et les guides pour décider quel jeu platiner et dans quel ordre. Un assistant IA répond aux blocages et coche les quêtes terminées, et un classement mondial permet de se comparer.",
@@ -86,7 +84,6 @@ export const projects: Project[] = [
     title: "Réseau local sous Packet Tracer",
     summary:
       "Montage d'un LAN en étoile (switch + 3 postes), adressage IPv4, tests de connectivité, observation d'ARP et de la table MAC du switch.",
-    visual: "network",
     tags: ["Cisco Packet Tracer", "IPv4", "ARP", "Switch"],
     context:
       "TP d'infrastructure : construire un petit réseau local sous Cisco Packet Tracer et observer comment les machines se trouvent et communiquent, de la couche 2 (adresses MAC) à la couche 3 (adresses IP).",
